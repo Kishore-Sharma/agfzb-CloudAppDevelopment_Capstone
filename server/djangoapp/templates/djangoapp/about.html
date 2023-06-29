@@ -39,40 +39,14 @@
     <main role="main" class="row justify-content-center">
 
             <div class="main col-lg-9 col-md-12">
-
-    <!--Add a dealer table here -->
-    <div class="container">
-    <table class="table" id="table" data-filter-control="true">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Dealer Name</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Zip</th>
-                    <th data-field="state" data-filter-control="select">State</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for dealer in dealerships %}
-                <tr>
-                    <td>{{dealer.id}}</td>
-                    <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
-                    <td>{{dealer.city}}</td>
-                    <td>{{dealer.address}}</td>
-                    <td>{{dealer.zip}}</td>
-                    <td>{{dealer.st}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        </div>
+                <h1 class="skeleton-heading">About Us</h1>
+<div class="row flex container">
+    <div class="col-12 p-4 h-100 d-flex justify-content-center bg-dark text-white">
+        <p class="lead bg-dark text-white"><strong>Welcome</strong> to Best Cars dealership, home to the best cars in North America. We sell domestic and imported cars at reasonable prices.</p>
     </div>
-</main>
-    </body>
-    <script>
-        $(function() {
-            $('#table').bootstrapTable()
-        })
-      </script>
+</div>
+            </div>
+    </main>
+</body>
+
 </html>
