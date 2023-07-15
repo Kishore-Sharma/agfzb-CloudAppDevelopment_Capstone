@@ -53,7 +53,7 @@ def get_dealers_from_cf(url):
     results = []
     json_result = get_request(url)
     # Retrieve the dealer data from the response
-    dealers = json_result["body"]["rows"]
+    dealers = json_result
     # For each dealer in the response
     for dealer in dealers:
         # Get its data in `doc` object
@@ -73,9 +73,9 @@ def get_dealers_from_cf(url):
 def get_dealer_by_id(url, dealer_id):
     # Call get_request with the dealer_id param
     json_result = get_request(url, dealerId=dealer_id)
-
+    print(json_result)
     # Create a CarDealer object from response
-    dealer = json_result["entries"][0]
+    dealer = json_result[0]
     dealer_obj = CarDealer(address=dealer["address"], city=dealer["city"], full_name=dealer["full_name"],
                            id=dealer["id"], lat=dealer["lat"], long=dealer["long"],
                            short_name=dealer["short_name"],
@@ -108,10 +108,10 @@ def get_dealer_reviews_from_cf(url, dealer_id):
     results = []
     # Perform a GET request with the specified dealer id
     json_result = get_request(url, dealerId=dealer_id)
-
+    print(json_result)
     if json_result:
         # Get all review data from the response
-        reviews = json_result["body"]["data"]["docs"]
+        reviews = json_result
         # For every review in the response
         for review in reviews:
             # Create a DealerReview object from the data
@@ -140,7 +140,7 @@ def get_dealer_reviews_from_cf(url, dealer_id):
                 # Creating a review object with some default values
                 review_obj = DealerReview(
                     dealership=dealership, id=id, name=name, purchase=purchase, review=review_content)
-
+            print('dasdas', review_obj.review)
             # Analysing the sentiment of the review object's review text and saving it to the object attribute "sentiment"
             review_obj.sentiment = analyze_review_sentiments(review_obj.review)
             print(f"sentiment: {review_obj.sentiment}")
@@ -157,7 +157,7 @@ def analyze_review_sentiments(review_text):
     try:
         if os.environ['env_type'] == 'PRODUCTION':
             url = os.environ['WATSON_NLU_URL']
-            api_key = os.environ["WATSON_NLU_API_KEY"]
+            api_key = os.environ['WATSON_NLU_API']
     except KeyError:
         url = config('WATSON_NLU_URL')
         api_key = config('WATSON_NLU_API_KEY')
